@@ -1,22 +1,33 @@
-const rp = require('request-promise');
+const carto = require('../utils/carto');
 
-const mapzen = (string) => {
-  const mapzenSearchAPI =
-   `https://geosearch.planninglabs.nyc/v1/autocomplete?boundary.rect.min_lon=-74.292297&boundary.rect.max_lon=-73.618011&boundary.rect.min_lat=40.477248&boundary.rect.max_lat=40.958123&text=${string}`;
+function toTitleCase(str) {
+  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+}
 
-  return rp(mapzenSearchAPI)
-    .then(res => JSON.parse(res))
-    .then(json => json.features.filter(feature => feature.properties.borough))
-    .then(json => json.map((feature) => {
-      const { label, pad_bbl: bbl } = feature.properties;
+const pluto = (string) => {
+  const tenDigits = string.match(/^\d{10,14}$/);
+  const lotClause = tenDigits ? `OR bbl = ${string}` : '';
 
-      return {
-        label,
-        bbl,
-        type: 'lot',
-      };
-    }))
-    .then(json => json.slice(0, 5)); // limit to first 5 results
+  const SQL = `
+    SELECT (address || ', ' ||
+      CASE
+        WHEN borough = 'MN' THEN 'Manhattan'
+        WHEN borough = 'BX' THEN 'Bronx'
+        WHEN borough = 'BK' THEN 'Brooklyn'
+        WHEN borough = 'QN' THEN 'Queens'
+        WHEN borough = 'SI' THEN 'Staten Island'
+      END) as address, bbl FROM support_mappluto
+     WHERE bbl = ${string}
+     LIMIT 5
+  `;
+
+  return carto.SQL(tenDigits ? SQL : 'SELECT 1 LIMIT 0').then(rows =>
+    rows.map((row) => {
+      row.label = toTitleCase(row.address);
+      row.type = 'lot';
+      delete row.address;
+      return row;
+    }));
 };
 
-module.exports = mapzen;
+module.exports = pluto;

@@ -1,5 +1,6 @@
 const express = require('express');
 
+const geoSearch = require('../search-helpers/geosearch');
 const neighborhood = require('../search-helpers/neighborhood');
 const pluto = require('../search-helpers/pluto');
 const zoningDistrict = require('../search-helpers/zoning-district');
@@ -13,7 +14,7 @@ router.get('/', (req, res) => {
   const { q } = req.query;
 
   Promise.all([
-    // mapzen(q),
+    geoSearch(q),
     neighborhood(q),
     pluto(q),
     zoningDistrict(q),
