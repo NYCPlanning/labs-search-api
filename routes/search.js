@@ -12,14 +12,17 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   const { q } = req.query;
+  const cleanedString = q.replace('\'', '\'\'');
 
+  // pass postgresql-friendly string to everything that's using carto
+  // all others get the original string
   Promise.all([
     geoSearch(q),
-    neighborhood(q),
-    pluto(q),
-    zoningDistrict(q),
-    zoningMapAmendment(q),
-    specialPurposeDistrict(q),
+    neighborhood(cleanedString),
+    pluto(cleanedString),
+    zoningDistrict(cleanedString),
+    zoningMapAmendment(cleanedString),
+    specialPurposeDistrict(cleanedString),
     commercialOverlay(q),
   ])
     .then((values) => {
