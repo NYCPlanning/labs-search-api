@@ -5,11 +5,12 @@ const zoningDistrict = (string) => {
     SELECT DISTINCT zonedist
     FROM zoning_districts_v201710
     WHERE LOWER(zonedist) LIKE LOWER('%25${string.toLowerCase()}%25')
+    ORDER BY zonedist ASC
     LIMIT 5
   `;
 
-  return carto.SQL(SQL).then(rows =>
-    rows.map((row) => {
+  return carto.SQL(SQL)
+    .then(rows => rows.map((row) => {
       row.label = row.zonedist;
       row.type = 'zoning-district';
       delete row.zonedist;
