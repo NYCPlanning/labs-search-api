@@ -26,9 +26,9 @@ router.get('/', (req, res) => {
     commercialOverlay(q),
   ])
     .then((values) => {
-      const [neighborhoods, lots, zoningDistricts, zmas, spdistricts, commercialOverlayResults] = values;
+      const [geosearch, neighborhoods, lots, zoningDistricts, zmas, spdistricts, commercialOverlayResults] = values;
       const responseArray = [];
-      res.json(responseArray.concat(neighborhoods, lots, zoningDistricts, zmas, spdistricts, commercialOverlayResults));
+      res.json(responseArray.concat(geosearch, neighborhoods, lots, zoningDistricts, zmas, spdistricts, commercialOverlayResults));
     }).catch((reason) => {
       console.error(reason); // eslint-disable-line
     });

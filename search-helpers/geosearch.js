@@ -9,10 +9,12 @@ const geosearch = (string) => {
     .then(json => json.features.filter(feature => feature.properties.borough))
     .then(json => json.map((feature) => {
       const { label, pad_bbl: bbl } = feature.properties;
+      const { geometry } = feature;
 
       return {
         label,
         bbl,
+        geometry,
         type: 'lot',
       };
     }))
