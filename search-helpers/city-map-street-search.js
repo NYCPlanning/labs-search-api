@@ -10,7 +10,12 @@ const cityMapStreetSearch = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL);
+  return carto.SQL(SQL)
+    .then(rows => rows.map((row) => {
+      row.the_geom = JSON.parse(row.the_geom);
+
+      return row;
+    }));
 };
 
 module.exports = cityMapStreetSearch;
