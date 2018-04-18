@@ -6,7 +6,7 @@ function toTitleCase(str) {
 
 const cityMapStreetSearch = (string) => {
   const SQL = `
-    SELECT official_s, ST_AsGeoJson(ST_Union(the_geom)) AS the_geom 
+    SELECT official_s, boro_name, ST_AsGeoJson(ST_Envelope(ST_Union(the_geom))) AS bbox, ST_AsGeoJson(ST_LineMerge(ST_Union(the_geom))) AS the_geom 
     FROM citymap_streetcenterlines_v0
     WHERE
       LOWER(official_s) LIKE LOWER('%25${string}%25')
@@ -17,6 +17,7 @@ const cityMapStreetSearch = (string) => {
   return carto.SQL(SQL)
     .then(rows => rows.map((row) => {
       row.the_geom = JSON.parse(row.the_geom);
+      row.bbox = JSON.parse(row.bbox);
       row.label = toTitleCase(row.official_s);
       row.type = 'city-street';
       return row;
