@@ -4,9 +4,8 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-const pluto = (string) => {
+const bbl = (string) => {
   const tenDigits = string.match(/^\d{10,14}$/);
-  const lotClause = tenDigits ? `OR bbl = ${string}` : '';
 
   const SQL = `
     SELECT (address || ', ' ||
@@ -30,4 +29,4 @@ const pluto = (string) => {
     }));
 };
 
-module.exports = pluto;
+module.exports = bbl;

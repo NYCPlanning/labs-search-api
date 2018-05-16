@@ -1,14 +1,19 @@
 const express = require('express');
-
-const geoSearch = require('../search-helpers/geosearch');
-const neighborhood = require('../search-helpers/neighborhood');
-const pluto = require('../search-helpers/pluto');
-const zoningDistrict = require('../search-helpers/zoning-district');
-const zoningMapAmendment = require('../search-helpers/zoning-map-amendment');
-const specialPurposeDistrict = require('../search-helpers/special-purpose-district');
-const commercialOverlay = require('../search-helpers/commercial-overlay');
+const searchHelpers = require('../search-helpers');
+const { camelize } = require('underscore.string');
 
 const router = express.Router();
+
+const {
+  geoSearch,
+  neighborhood,
+  bbl,
+  cityMapAlteration,
+  zoningDistrict,
+  zoningMapAmendment,
+  specialPurposeDistrict,
+  commercialOverlay,
+} = searchHelpers;
 
 router.get('/', (req, res) => {
   const { q } = req.query;
@@ -19,7 +24,8 @@ router.get('/', (req, res) => {
   Promise.all([
     geoSearch(q),
     neighborhood(cleanedString),
-    pluto(cleanedString),
+    bbl(cleanedString),
+    cityMapAlteration(cleanedString),
     zoningDistrict(cleanedString),
     zoningMapAmendment(cleanedString),
     specialPurposeDistrict(cleanedString),
@@ -32,6 +38,23 @@ router.get('/', (req, res) => {
     }).catch((reason) => {
       console.error(reason); // eslint-disable-line
     });
+});
+
+router.get('/:search_helper', (req, res) => {
+  const { params: { search_helper: searchHelper } } = req;
+  const camelizedHelperName = camelize(searchHelper);
+  const search_helper = searchHelpers[camelizedHelperName];
+
+  if (!search_helper) {
+    res.status(500).send({ error: 'Search helper does not exist' });
+  } else {
+    const { q } = req.query;
+    const cleanedString = q.replace('\'', '\'\'');
+
+    search_helper(cleanedString).then((data) => {
+      res.json(data);
+    });
+  }
 });
 
 module.exports = router;
