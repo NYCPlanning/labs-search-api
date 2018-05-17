@@ -11,7 +11,7 @@ const zoningDistrict = (string) => {
   return carto.SQL(SQL).then(rows =>
     rows.map((row) => {
       row.label = row.sdname;
-      row.type = 'special_purpose_districts_v201710';
+      row.type = 'special-purpose-district';
       delete row.sdname;
       return row;
     }));
