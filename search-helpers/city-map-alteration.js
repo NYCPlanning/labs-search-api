@@ -4,12 +4,12 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-const cityMapAmendment = (string) => {
+const cityMapAlteration = (string) => {
   const SQL = `
     SELECT
       LOWER(substring(link_addre, '(?<=_All%5C%5C).*?(?=.pdf)')) as label,
       effective,
-      ST_AsGeoJSON(the_geom) as geometry
+      ST_AsGeoJSON(the_geom) as the_geom
     FROM citymap_amendments_v0
     WHERE
       effective IS NOT NULL AND
@@ -19,10 +19,10 @@ const cityMapAmendment = (string) => {
 
   return carto.SQL(SQL).then(rows =>
     rows.map((row) => {
-      row.geometry = JSON.parse(row.geometry);
+      row.the_geom = JSON.parse(row.the_geom);
       row.type = 'city-map-alteration';
       return row;
     }));
 };
 
-module.exports = cityMapAmendment;
+module.exports = cityMapAlteration;
