@@ -7,17 +7,18 @@ function toTitleCase(str) {
 const cityMapAmendment = (string) => {
   const SQL = `
     SELECT
-      app_num,
+      LOWER(substring(link_addre, '(?<=_All%5C%5C).*?(?=.pdf)')) as label,
+      effective,
       ST_AsGeoJSON(the_geom) as geometry
     FROM citymap_amendments_v0
     WHERE
-      LOWER(app_num) LIKE LOWER('%25${string.toUpperCase()}%25')
+      effective IS NOT NULL AND
+      LOWER(substring(link_addre, '(?<=_All%5C%5C).*?(?=.pdf)')) LIKE LOWER('%25${string.toUpperCase()}%25')
     LIMIT 5
   `;
 
   return carto.SQL(SQL).then(rows =>
     rows.map((row) => {
-      row.label = toTitleCase(row.app_num);
       row.geometry = JSON.parse(row.geometry);
       row.type = 'city-map-alteration';
       return row;

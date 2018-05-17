@@ -4,37 +4,26 @@ const { camelize } = require('underscore.string');
 
 const router = express.Router();
 
-const {
-  geoSearch,
-  neighborhood,
-  bbl,
-  cityMapAlteration,
-  zoningDistrict,
-  zoningMapAmendment,
-  specialPurposeDistrict,
-  commercialOverlay,
-} = searchHelpers;
-
 router.get('/', (req, res) => {
-  const { q } = req.query;
+  const { q, helpers } = req.query;
   const cleanedString = q.replace('\'', '\'\'');
 
-  // pass postgresql-friendly string to everything that's using carto
-  // all others get the original string
-  Promise.all([
-    geoSearch(q),
-    neighborhood(cleanedString),
-    bbl(cleanedString),
-    cityMapAlteration(cleanedString),
-    zoningDistrict(cleanedString),
-    zoningMapAmendment(cleanedString),
-    specialPurposeDistrict(cleanedString),
-    commercialOverlay(q),
-  ])
+  // execute promises for each of the passed-in search helpers
+  const promises = helpers.map((helper) => {
+    const camelizedHelperName = camelize(helper);
+    const search_helper = searchHelpers[camelizedHelperName];
+
+    return search_helper(cleanedString);
+  });
+
+  // TODO if no helpers are specified in query params, execute ALL of them
+
+  // Promise.all
+  Promise.all(promises)
     .then((values) => {
-      const [geosearch, neighborhoods, lots, zoningDistricts, zmas, spdistricts, commercialOverlayResults] = values;
-      const responseArray = [];
-      res.json(responseArray.concat(geosearch, neighborhoods, lots, zoningDistricts, zmas, spdistricts, commercialOverlayResults));
+      // merge the results of all of the promises into a single array of objects
+      const merged = [].concat(...values);
+      res.json(merged); // send it back to the client
     }).catch((reason) => {
       console.error(reason); // eslint-disable-line
     });
