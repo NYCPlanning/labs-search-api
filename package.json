@@ -27,7 +27,7 @@
     "underscore.string": "3.3.4"
   },
   "engines": {
-    "node": "8.6.0",
+    "node": "8.11.3",
     "npm": "5.3.0"
   },
   "devDependencies": {
