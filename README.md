@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/NYCPlanning/labs-search-api/tree/develop.svg?style=svg)](https://circleci.com/gh/NYCPlanning/labs-search-api/tree/develop)
+
 # zola-search-api
 An express.js api that combines mapzen search results with carto database results, providing autcomplete search for [ZoLa](https://zola.planning.nyc.government).  
 
