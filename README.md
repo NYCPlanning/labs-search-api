@@ -13,7 +13,7 @@ You will need the following things properly installed on your computer.
 ## Local development
 
 - Clone this repo `https://github.com/NYCPlanning/labs-zola-search-api.git`
-- Install Dependencies `npm install`
+- Install Dependencies `yarn`
 - Start the server `npm run devstart`
 
 ## Architecture
