@@ -7,6 +7,7 @@ const zoningDistrict = require('./zoning-district');
 const zoningMapAmendment = require('./zoning-map-amendment');
 const specialPurposeDistrict = require('./special-purpose-district');
 const commercialOverlay = require('./commercial-overlay');
+const waterfrontParkName = require('./waterfront-park-name');
 
 module.exports = {
   geosearch,
@@ -18,4 +19,5 @@ module.exports = {
   zoningMapAmendment,
   specialPurposeDistrict,
   commercialOverlay,
+  waterfrontParkName,
 };
