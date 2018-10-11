@@ -1,8 +1,8 @@
 const carto = require('../utils/carto');
 
-function toTitleCase(str) {
-  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
-}
+// function toTitleCase(str) {
+// return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+// }
 
 const cityMapAlteration = (string) => {
   const SQL = `
