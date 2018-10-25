@@ -21,6 +21,7 @@ You will need the following things properly installed on your computer.
 ### Routes
 
 - `/search` - gets results that match a string passed in as query parameter `q`
+- e.g. localhost:4000/search/waterfront-park-name?q=esplanade
 
 ### Types of results
 
