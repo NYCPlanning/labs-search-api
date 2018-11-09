@@ -2,7 +2,7 @@ const carto = require('../utils/carto');
 
 const waterfrontParkName = (string) => {
   const SQL = `
-    SELECT name, summary_of
+    SELECT name, summary_of, paws_id
     FROM wpaas_v201810
     WHERE LOWER(name) LIKE LOWER('%25${string.toLowerCase()}%25')
       OR LOWER(summary_of) LIKE LOWER('%25${string.toLowerCase()}%25')
