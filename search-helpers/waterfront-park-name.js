@@ -9,7 +9,7 @@ const waterfrontParkName = (string) => {
   `;
   return carto.SQL(SQL).then(rows =>
     rows.map((row) => {
-      row.label = row.paws_name;
+      row.label = row.name;
       row.type = 'waterfront-park-name';
       return row;
     }));
