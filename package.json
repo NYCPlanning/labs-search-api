@@ -23,7 +23,7 @@
     "proj4": "^2.4.4",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
-    "slug": "^0.9.1",
+    "slug": "^0.9.3",
     "underscore": "^1.8.3",
     "underscore.string": "3.3.4"
   },
