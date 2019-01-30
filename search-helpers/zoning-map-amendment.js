@@ -8,8 +8,9 @@ const zoningMapAmendment = (string) => {
   const SQL = `
     SELECT
       project_na,
+      status,
       ulurpno
-    FROM zoning_map_amendments_v201710
+    FROM zoning_map_amendments_v20181206
     WHERE
       LOWER(project_na) LIKE LOWER('%25${string.toUpperCase()}%25') OR LOWER(ulurpno) LIKE LOWER('%25${string}%25')
     LIMIT 5
