@@ -10,7 +10,7 @@ const cityMapAlteration = (string) => {
       LOWER(substring(link_addre, '(?<=_All%5C%5C).*?(?=.pdf)')) as label,
       effective,
       ST_AsGeoJSON(the_geom) as the_geom
-    FROM citymap_amendments_v0
+    FROM citymap_amendments_v3
     WHERE
       effective IS NOT NULL AND
       LOWER(substring(link_addre, '(?<=_All%5C%5C).*?(?=.pdf)')) LIKE LOWER('%25${string.toUpperCase()}%25')
