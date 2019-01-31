@@ -15,7 +15,7 @@ const bbl = (string) => {
         WHEN borough = 'BK' THEN 'Brooklyn'
         WHEN borough = 'QN' THEN 'Queens'
         WHEN borough = 'SI' THEN 'Staten Island'
-      END) as address, bbl FROM support_mappluto
+      END) as address, bbl FROM mappluto_18v2
      WHERE bbl = ${string}
      LIMIT 5
   `;
