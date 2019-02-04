@@ -3,7 +3,7 @@ const carto = require('../utils/carto');
 const zoningDistrict = (string) => {
   const SQL = `
     SELECT DISTINCT sdname, cartodb_id
-    FROM special_purpose_districts_v20181206
+    FROM special_purpose_districts
     WHERE LOWER(sdname) LIKE LOWER('%25${string.toLowerCase()}%25')
     LIMIT 5
   `;
