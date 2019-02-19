@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
     const camelizedHelperName = camelize(helper);
     const search_helper = searchHelpers[camelizedHelperName];
 
-    return search_helper(cleanedString);
+    return search_helper(cleanedString, req);
   });
 
 
