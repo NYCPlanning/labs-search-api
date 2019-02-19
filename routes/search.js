@@ -46,7 +46,7 @@ router.get('/:search_helper', (req, res) => {
     const { q } = req.query;
     const cleanedString = q.replace('\'', '\'\'');
 
-    search_helper(cleanedString).then((data) => {
+    search_helper(cleanedString, req).then((data) => {
       res.json(data);
     });
   }
