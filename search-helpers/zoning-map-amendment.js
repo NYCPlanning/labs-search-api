@@ -16,16 +16,13 @@ const zoningMapAmendment = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL).then((rows) => {
-    if (rows.length > 0) {
-      rows.map((row) => {
-        row.label = row.project_na ? toTitleCase(row.project_na) : 'No Name';
-        row.type = 'zma';
-        delete row.project_na;
-        return row;
-      });
-    }
-  });
+  return carto.SQL(SQL).then(rows =>
+    rows.map((row) => {
+      row.label = row.project_na ? toTitleCase(row.project_na) : 'No Name';
+      row.type = 'zma';
+      delete row.project_na;
+      return row;
+    }));
 };
 
 module.exports = zoningMapAmendment;
