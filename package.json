@@ -28,7 +28,7 @@
     "underscore.string": "3.3.5"
   },
   "engines": {
-    "node": "^10.6.0"
+    "node": "^8.11.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
