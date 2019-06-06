@@ -118,3 +118,19 @@ it('test zoning-map-amendment only', (done) => {
       done();
     });
 });
+
+it('test bbl less than 10 digits returns empty array', (done) => {
+  chai.request(server)
+    .get('/search/bbl?q=123456789')
+    .end((err, res) => {
+      should.not.exist(err);
+
+      res.status.should.equal(200);
+      res.type.should.equal('application/json');
+
+      res.body.should.deep.equal([]);
+
+      done();
+    });
+});
+

@@ -22,13 +22,23 @@ const Carto = {
       time: true,
     })
       .then((response) => {
-        console.log(`Carto API call completed in ${response.elapsedTime}ms`);
+        if (response.elapsedTime > 2000) {
+          console.log(`
+            Carto API call slow, completed in ${response.elapsedTime}ms:
+            Query was: ${cleanedQuery}
+          `);
+        }
+
         const obj = JSON.parse(response.body);
         return obj.rows ? obj.rows : obj;
         // throw new Error('Not found');
       })
-      .catch((reason) => {
-        console.log(reason);
+      .catch((response) => {
+        console.log(`
+          Carto API call completed with ERROR in ${response.elapsedTime}ms:
+          ${response.error}. Query: ${cleanedQuery}
+        `);
+        return [];
       });
   },
 };

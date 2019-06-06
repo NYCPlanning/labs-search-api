@@ -4,7 +4,7 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-const bbl = (string) => {
+const bbl = async (string) => {
   const tenDigits = string.match(/^\d{10,14}$/);
 
   const SQL = `
@@ -20,13 +20,17 @@ const bbl = (string) => {
      LIMIT 5
   `;
 
-  return carto.SQL(tenDigits ? SQL : 'SELECT 1 LIMIT 0').then(rows =>
-    rows.map((row) => {
-      row.label = toTitleCase(row.address);
-      row.type = 'lot';
-      delete row.address;
-      return row;
-    }));
+  if (tenDigits) {
+    return carto.SQL(SQL).then(rows =>
+      rows.map((row) => {
+        row.label = toTitleCase(row.address);
+        row.type = 'lot';
+        delete row.address;
+        return row;
+      }));
+  }
+
+  return [];
 };
 
 module.exports = bbl;
