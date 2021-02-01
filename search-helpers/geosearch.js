@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const geosearch = (string, req) => {
   const referer = req.header('Referer');
   const geoSearchAPICall =
-   `https://161.35.251.18/v1/autocomplete?boundary.rect.min_lon=-74.292297&boundary.rect.max_lon=-73.618011&boundary.rect.min_lat=40.477248&boundary.rect.max_lat=40.958123&text=${string}`;
+   `https://staging.geosearch.planninglabs.nyc/v1/autocomplete?boundary.rect.min_lon=-74.292297&boundary.rect.max_lon=-73.618011&boundary.rect.min_lat=40.477248&boundary.rect.max_lat=40.958123&text=${string}`;
 
   return rp(geoSearchAPICall, {
     headers: {
