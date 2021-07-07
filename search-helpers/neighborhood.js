@@ -15,7 +15,7 @@ const neighborhood = (string) => {
       ST_Centroid(the_geom) as the_geom,
       ntaname,
       ntacode
-    FROM nta_boundaries_v201811
+    FROM dcp_nta
     WHERE
       LOWER(ntaname) LIKE LOWER('%25${string}%25')
       AND ntaname NOT ILIKE 'park-cemetery-etc%25'
