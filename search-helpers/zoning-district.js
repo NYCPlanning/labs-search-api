@@ -3,7 +3,7 @@ const carto = require('../utils/carto');
 const zoningDistrict = (string) => {
   const SQL = `
     SELECT DISTINCT zonedist
-    FROM zoning_districts
+    FROM dcp_zoning_districts
     WHERE LOWER(zonedist) LIKE LOWER('%25${string.toLowerCase()}%25')
     ORDER BY zonedist ASC
     LIMIT 5

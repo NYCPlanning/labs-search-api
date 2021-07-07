@@ -7,7 +7,7 @@ function toTitleCase(str) {
 const cityMapStreetSearch = (string) => {
   const SQL = `
     SELECT official_s, boro_name, ST_AsGeoJson(ST_Envelope(ST_Union(the_geom))) AS bbox, ST_AsGeoJson(ST_LineMerge(ST_Union(the_geom))) AS the_geom
-    FROM citymap_streetcenterlines_v1
+    FROM dcp_dcm_street_centerline
     WHERE
       LOWER(official_s) LIKE LOWER('%25${string}%25')
     GROUP BY boro_name, official_s

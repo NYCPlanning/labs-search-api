@@ -15,7 +15,7 @@ const bbl = async (string) => {
         WHEN borough = 'BK' THEN 'Brooklyn'
         WHEN borough = 'QN' THEN 'Queens'
         WHEN borough = 'SI' THEN 'Staten Island'
-      END) as address, bbl FROM mappluto
+      END) as address, bbl FROM dcp_mappluto
      WHERE bbl = ${string}
      LIMIT 5
   `;

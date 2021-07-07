@@ -10,7 +10,7 @@ const zoningMapAmendment = (string) => {
       project_na,
       status,
       ulurpno
-    FROM zoning_map_amendments
+    FROM dcp_zoning_map_amendments
     WHERE
       LOWER(project_na) LIKE LOWER('%25${string.toUpperCase()}%25') OR LOWER(ulurpno) LIKE LOWER('%25${string}%25')
     LIMIT 5
