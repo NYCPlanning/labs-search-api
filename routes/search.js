@@ -7,7 +7,7 @@ const router = express.Router();
 // get several search types by passing in a helpers[] query param
 router.get('/', (req, res) => {
   const { q } = req.query;
-  let { helpers } = req.query;
+  let { helpers } = req.query; // optional
 
   const cleanedString = q.replace('\'', '\'\'');
 
