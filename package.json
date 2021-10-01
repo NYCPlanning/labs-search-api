@@ -28,7 +28,7 @@
     "underscore.string": "3.3.5"
   },
   "engines": {
-    "node": "^8.11.3"
+    "node": "^10.18.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -36,5 +36,8 @@
     "eslint-config-airbnb-base": "^12.0.2",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.6.1"
+  },
+  "volta": {
+    "node": "10.18.1"
   }
 }

@@ -3,7 +3,7 @@ const carto = require('../utils/carto');
 const commercialOverlay = (string) => {
   const SQL = `
     SELECT DISTINCT overlay
-    FROM commercial_overlays
+    FROM dcp_commercial_overlays
     WHERE LOWER(overlay) LIKE LOWER('%25${string.toLowerCase()}%25')
     ORDER BY overlay ASC
     LIMIT 5
