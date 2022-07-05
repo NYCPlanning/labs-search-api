@@ -1,4 +1,5 @@
 const geosearch = require('./geosearch');
+const geosearchV2 = require('./geosearch-v2');
 const neighborhood = require('./neighborhood');
 const bbl = require('./bbl');
 const cityMapAlteration = require('./city-map-alteration');
@@ -11,6 +12,7 @@ const waterfrontParkName = require('./waterfront-park-name');
 
 module.exports = {
   geosearch,
+  geosearchV2,
   neighborhood,
   bbl,
   cityMapAlteration,
