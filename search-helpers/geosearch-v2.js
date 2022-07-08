@@ -13,7 +13,7 @@ const geosearchV2 = (string, req) => {
     .then(res => JSON.parse(res))
     .then(json => json.features.filter(feature => feature.properties.borough))
     .then(json => json.map((feature) => {
-      const { label, pad_bbl: bbl } = feature.properties;
+      const { label, addendum: { pad: { bbl }} } = feature.properties;
       const { geometry } = feature;
 
       return {
