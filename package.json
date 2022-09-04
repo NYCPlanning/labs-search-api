@@ -9,7 +9,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "apicache": "^1.1.0",
+    "apicache": "^1.6.3",
     "body-parser": "^1.15.2",
     "chai": "4.1.2",
     "chai-http": "4.0.0",
@@ -28,7 +28,7 @@
     "underscore.string": "3.3.5"
   },
   "engines": {
-    "node": "^10.18.1"
+    "node": "^16"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -39,6 +39,6 @@
     "nodemon": "^2.0.18"
   },
   "volta": {
-    "node": "10.18.1"
+    "node": "^16"
   }
 }
