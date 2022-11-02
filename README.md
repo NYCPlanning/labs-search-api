@@ -8,13 +8,13 @@ An express.js api that combines mapzen search results with carto database result
 You will need the following things properly installed on your computer.
 
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (with NPM)
+- [Node.js](https://nodejs.org/) (with yarn)
 
 ## Local development
 
 - Clone this repo `https://github.com/NYCPlanning/labs-zola-search-api.git`
 - Install Dependencies `yarn`
-- Start the server `npm run devstart`
+- Start the server `yarn run devstart`
 
 ## Architecture
 
