@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
 
   const cleanedString = q.replace('\'', '\'\'');
 
-  // if no helpers param was passed, return only geosearch results
-  if (!helpers) helpers = ['geosearch'];
+  // if no helpers param was passed, return only geosearch-v2 results
+  if (!helpers) helpers = ['geosearch-v2'];
 
   // execute promises for each of the passed-in search helpers
   const promises = helpers.map((helper) => {
