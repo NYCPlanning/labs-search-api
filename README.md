@@ -8,7 +8,7 @@ An express.js api that combines mapzen search results with carto database result
 You will need the following things properly installed on your computer.
 
 - [Git](https://git-scm.com/)
-- [Node.js](https://nodejs.org/) (with yarn)
+- [Node.js](https://nodejs.org/) (with yarn) **version listed in .nvmrc**
 
 ## Local development
 
