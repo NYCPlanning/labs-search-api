@@ -37,8 +37,5 @@
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^2.6.1",
     "nodemon": "^2.0.18"
-  },
-  "volta": {
-    "node": "^16"
   }
 }

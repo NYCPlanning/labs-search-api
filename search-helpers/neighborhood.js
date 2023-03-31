@@ -12,10 +12,10 @@ function format(ntaname, string) {
 const neighborhood = (string) => {
   const SQL = `
     SELECT
-      ST_Centroid(the_geom) as the_geom,
-      ntaname,
-      ntacode
-    FROM dcp_nta
+      ST_Centroid(the_geom_webmercator) as the_geom,
+      nta2020 as ntacode,
+      ntaname
+    FROM dcp_nta_2020
     WHERE
       LOWER(ntaname) LIKE LOWER('%25${string}%25')
       AND ntaname NOT ILIKE 'park-cemetery-etc%25'
