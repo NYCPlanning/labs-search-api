@@ -12,7 +12,7 @@ const server = require('../../app');
 describe('GET /search', () => {
   it('should respond with searches that match the specified address', (done) => {
     chai.request(server)
-      .get('/search?helpers[]=geosearch&helpers[]=neighborhood&helpers[]=bbl&helpers[]=zoning-district&helpers[]=zoning-map-amendment&helpers[]=special-purpose-district&helpers[]=commercial-overlay&q=120%20broadway')
+      .get('/search?helpers[]=geosearch-v2&helpers[]=neighborhood&helpers[]=bbl&helpers[]=zoning-district&helpers[]=zoning-map-amendment&helpers[]=special-purpose-district&helpers[]=commercial-overlay&q=120%20broadway')
       .end((err, res) => {
         should.not.exist(err);
         res.status.should.equal(200);
@@ -25,7 +25,7 @@ describe('GET /search', () => {
 
 it('test geosearch only', (done) => {
   chai.request(server)
-    .get('/search/geosearch?q=120 Broadway')
+    .get('/search/geosearch-v2?q=120 Broadway')
     .end((err, res) => {
       should.not.exist(err);
       res.status.should.equal(200);

@@ -5,7 +5,7 @@ const { camelize } = require('underscore.string');
 const router = express.Router();
 
 // get several search types by passing in a helpers[] query param
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   const { q } = req.query;
   let { helpers } = req.query; // optional
 
@@ -29,8 +29,9 @@ router.get('/', (req, res) => {
       // merge the results of all of the promises into a single array of objects
       const merged = [].concat(...values);
       res.json(merged); // send it back to the client
-    }).catch((reason) => {
-      console.error(reason); // eslint-disable-line
+    }).catch((error) => {
+      // console.error(error); // eslint-disable-line
+      next(error)
     });
 });
 
