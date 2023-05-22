@@ -1,6 +1,6 @@
 const carto = require('../utils/carto');
 
-const zoningDistrict = (string) => {
+const zoningDistrict = async (string) => {
   const SQL = `
     SELECT DISTINCT sdname, cartodb_id
     FROM dcp_special_purpose_districts
@@ -8,13 +8,18 @@ const zoningDistrict = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL).then(rows =>
-    rows.map((row) => {
+  try {
+    const rows = await carto.SQL(SQL)
+    return rows.map((row) => {
       row.label = row.sdname;
       row.type = 'special-purpose-district';
       delete row.sdname;
       return row;
-    }));
+    });
+  } catch (error) {
+    throw error
+  }
+
 };
 
 module.exports = zoningDistrict;

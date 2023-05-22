@@ -5,7 +5,7 @@
     "start": "node ./bin/www",
     "test": "NODE_ENV=test node ./node_modules/mocha/bin/mocha ./test/**/*.js --exit",
     "devstart": "nodemon ./bin/www",
-    "lint": "eslint -c .eslintrc lib"
+    "lint": "eslint src"
   },
   "license": "ISC",
   "dependencies": {
@@ -30,11 +30,7 @@
     "node": "18.16.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "eslint": "^4.8.0",
-    "eslint-config-airbnb-base": "^12.0.2",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-import": "^2.6.1",
+    "eslint": "^8.40.0",
     "nodemon": "^2.0.18"
   }
 }
