@@ -4,7 +4,7 @@ function toTitleCase(str) {
   return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 }
 
-const zoningMapAmendment = (string) => {
+const zoningMapAmendment = async (string) => {
   const SQL = `
     SELECT
       project_na,
@@ -16,13 +16,17 @@ const zoningMapAmendment = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL).then(rows =>
-    rows.map((row) => {
+  try {
+    const rows = await carto.SQL(SQL);
+    return rows.map((row) => {
       row.label = row.project_na ? toTitleCase(row.project_na) : 'No Name';
       row.type = 'zma';
       delete row.project_na;
       return row;
-    }));
+    })
+  } catch (error) {
+    throw error
+  }
 };
 
 module.exports = zoningMapAmendment;
