@@ -9,7 +9,7 @@ function format(ntaname, string) {
   return toTitleCase(nabes.filter(nabe => nabe.toLowerCase().indexOf(string.toLowerCase()) !== -1)[0]);
 }
 
-const neighborhood = (string) => {
+const neighborhood = async (string) => {
   const SQL = `
     SELECT
       ST_Centroid(the_geom_webmercator) as the_geom,
@@ -22,8 +22,9 @@ const neighborhood = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL, 'geojson').then((FeatureCollection) => { // eslint-disable-line
-    return FeatureCollection.features.map((feature) => {
+  try {
+    const featureCollection = await carto.SQL(SQL, 'geojson')
+    return featureCollection.features.map((feature) => {
       const { geometry, properties } = feature;
       return {
         label: format(properties.ntaname, string),
@@ -31,7 +32,9 @@ const neighborhood = (string) => {
         type: 'neighborhood',
       };
     });
-  });
+  } catch (error) {
+    throw error
+  }
 };
 
 module.exports = neighborhood;
