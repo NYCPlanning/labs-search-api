@@ -1,18 +1,23 @@
 const carto = require('../utils/carto');
 
-const waterfrontParkName = (string) => {
+const waterfrontParkName = async (string) => {
   const SQL = `
-    SELECT name, summary_of, paws_id
-    FROM wpaas_v201811
+    SELECT name, summary, wpaa_id
+    FROM wpaas_v202205
     WHERE LOWER(name) LIKE LOWER('%25${string.toLowerCase()}%25')
-      OR LOWER(summary_of) LIKE LOWER('%25${string.toLowerCase()}%25')
+      OR LOWER(summary) LIKE LOWER('%25${string.toLowerCase()}%25')
   `;
-  return carto.SQL(SQL).then(rows =>
-    rows.map((row) => {
+
+  try {
+    const rows = await carto.SQL(SQL)
+    return rows.map((row) => {
       row.label = row.name;
       row.type = 'waterfront-park-name';
       return row;
-    }));
+    })
+  } catch (error) {
+    throw error
+  }
 };
 
 module.exports = waterfrontParkName;
