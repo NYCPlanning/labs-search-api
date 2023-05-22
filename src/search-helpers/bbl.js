@@ -20,17 +20,19 @@ const bbl = async (string) => {
      LIMIT 5
   `;
 
-  if (tenDigits) {
-    return carto.SQL(SQL).then(rows =>
-      rows.map((row) => {
-        row.label = toTitleCase(row.address);
-        row.type = 'lot';
-        delete row.address;
-        return row;
-      }));
-  }
+  if (!tenDigits) return []
 
-  return [];
+  try {
+    const rows = await carto.SQL(SQL)
+    return rows.map((row) => {
+      row.label = toTitleCase(row.address);
+      row.type = 'lot';
+      delete row.address;
+      return row;
+    });
+  } catch (error) {
+    throw error
+  }
 };
 
 module.exports = bbl;
