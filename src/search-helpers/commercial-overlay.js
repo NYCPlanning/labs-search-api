@@ -1,6 +1,6 @@
 const carto = require('../utils/carto');
 
-const commercialOverlay = (string) => {
+const commercialOverlay = async (string) => {
   const SQL = `
     SELECT DISTINCT overlay
     FROM dcp_commercial_overlays
@@ -9,13 +9,17 @@ const commercialOverlay = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL)
-    .then(rows => rows.map((row) => {
+  try {
+    const rows = await carto.SQL(SQL);
+    return rows.map((row) => {
       row.label = row.overlay;
       row.type = 'commercial-overlay';
       delete row.overlay;
       return row;
-    }));
+    })
+  } catch (error) {
+    throw error
+  }
 };
 
 module.exports = commercialOverlay;
