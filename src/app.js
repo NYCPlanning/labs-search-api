@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes');
 
 const app = express();
-const jsonErrorHandler = (err, req, res, next) => {
+const jsonErrorHandler = (err, req, res, _next) => {
   res.status(500).send(err.message);
 }
 

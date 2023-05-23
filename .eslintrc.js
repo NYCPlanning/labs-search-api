@@ -11,5 +11,15 @@ module.exports = {
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-unused-vars": [
+            "error",
+            {
+                "argsIgnorePattern" : "^_"
+            }
+          ]
+    },
+    "globals": {
+        "it": "readonly",
+        "describe": "readonly"
     }
 }
