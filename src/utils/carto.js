@@ -10,17 +10,12 @@ const Carto = {
   SQL: async (query, type = 'json')=> {
     const cleanedQuery = query.replace('\n', '');
     const url = buildSqlUrl(cleanedQuery, type);
-
-    try {
-      const response = await axios({
-        method: 'get',
-        url,
-      })
-      // Return rows object for json queries and return full geojson feature collection for geojson queries
-      return type === 'json' ? response.data.rows : response.data;
-    } catch (error) {
-      throw error.response?.statusText ? error.response?.statusText : "Internal server error"
-    }
+    const response = await axios({
+      method: 'get',
+      url,
+    })
+    // Return rows object for json queries and return full geojson feature collection for geojson queries
+    return type === 'json' ? response.data.rows : response.data;
   },
 };
 

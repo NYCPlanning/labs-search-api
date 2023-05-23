@@ -23,7 +23,7 @@ const geosearchV2 = async (string, req) => {
       };
     }).slice(0, 5)
   } catch (error) {
-    throw error.response?.statusText ? error.response?.statusText : "Internal server error"
+    throw new Error(`Failed to search geosearch-v2 helper for string: ${string}. Failed with error: ${error.response?.statusText ? error.response?.statusText : "Internal server error"}`)
   }
 };
 

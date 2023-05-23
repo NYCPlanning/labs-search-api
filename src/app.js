@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const routes = require('./routes');
 
 const app = express();
-
+const jsonErrorHandler = (err, req, res, next) => {
+  res.status(500).send(err.message);
+}
 
 // allows CORS
 app.all('*', (req, res, next) => {
@@ -27,5 +29,7 @@ app.use((err, req, res, next) => {
 
   next(err);
 });
+
+app.use(jsonErrorHandler)
 
 module.exports = app;

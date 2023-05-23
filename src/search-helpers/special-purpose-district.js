@@ -17,7 +17,7 @@ const zoningDistrict = async (string) => {
       return row;
     });
   } catch (error) {
-    throw error
+    throw new Error(`Failed to search special-purpose-district helper for string: ${string}. Failed with error: ${error.response?.statusText ? error.response?.statusText : "Internal server error"}`)
   }
 
 };

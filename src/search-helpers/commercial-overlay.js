@@ -18,7 +18,7 @@ const commercialOverlay = async (string) => {
       return row;
     })
   } catch (error) {
-    throw error
+    throw new Error(`Failed to search commercial-overlay helper for string: ${string}. Failed with error: ${error.response?.statusText ? error.response?.statusText : "Internal server error"}`)
   }
 };
 
