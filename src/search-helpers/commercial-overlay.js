@@ -1,4 +1,4 @@
-const carto = require('../utils/carto');
+const carto = require("../utils/carto");
 
 const commercialOverlay = async (string) => {
   const SQL = `
@@ -13,12 +13,18 @@ const commercialOverlay = async (string) => {
     const rows = await carto.SQL(SQL);
     return rows.map((row) => {
       row.label = row.overlay;
-      row.type = 'commercial-overlay';
+      row.type = "commercial-overlay";
       delete row.overlay;
       return row;
-    })
+    });
   } catch (error) {
-    throw new Error(`Failed to search commercial-overlay helper for string: ${string}. Failed with error: ${error.response?.statusText ? error.response?.statusText : "Internal server error"}`)
+    throw new Error(
+      `Failed to search commercial-overlay helper for string: ${string}. Failed with error: ${
+        error.response?.statusText
+          ? error.response?.statusText
+          : "Internal server error"
+      }`
+    );
   }
 };
 

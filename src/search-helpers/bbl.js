@@ -1,7 +1,10 @@
-const carto = require('../utils/carto');
+const carto = require("../utils/carto");
 
 function toTitleCase(str) {
-  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  return str.replace(
+    /\w\S*/g,
+    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  );
 }
 
 const bbl = async (string) => {
@@ -20,18 +23,24 @@ const bbl = async (string) => {
      LIMIT 5
   `;
 
-  if (!tenDigits) return []
+  if (!tenDigits) return [];
 
   try {
-    const rows = await carto.SQL(SQL)
+    const rows = await carto.SQL(SQL);
     return rows.map((row) => {
       row.label = toTitleCase(row.address);
-      row.type = 'lot';
+      row.type = "lot";
       delete row.address;
       return row;
     });
   } catch (error) {
-    throw new Error(`Failed to search bbl helper for string: ${string}. Failed with error: ${error.response?.statusText ? error.response?.statusText : "Internal server error"}`)
+    throw new Error(
+      `Failed to search bbl helper for string: ${string}. Failed with error: ${
+        error.response?.statusText
+          ? error.response?.statusText
+          : "Internal server error"
+      }`
+    );
   }
 };
 
