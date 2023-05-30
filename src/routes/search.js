@@ -14,20 +14,20 @@ router.get('/', async (req, res, next) => {
   // if no helpers param was passed, return only geosearch-v2 results
   if (!helpers) helpers = ['geosearch-v2'];
 
+  const promises = helpers.map((helper) => {
+    const camelizedHelperName = camelize(helper);
+    const search_helper = searchHelpers[camelizedHelperName];
+
+    return search_helper(cleanedString, req);
+  });
+
   try {
-    let merged = []
-    // Loop through each helper, calling the corresponding async function
-    // and merging in results
-    for (const helper of helpers) {
-      const camelizedHelperName = camelize(helper);
-      const search_helper = searchHelpers[camelizedHelperName];
-      const result = await search_helper(cleanedString, req)
-      merged = merged.concat(result)
-    }
-    res.json(merged);
+    // Call helpers in parallel then flatten results into one array
+    const results = await Promise.all(promises)
+    res.json(results.flat())
   } catch (error) {
-    // If any helpers throw an error, return the error
-    // instead of results
+    // If any helpers throw an error,
+    // pass error up to Express error handling middleware
     next(error)
   }
 });
