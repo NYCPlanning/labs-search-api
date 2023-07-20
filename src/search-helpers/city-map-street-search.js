@@ -1,7 +1,10 @@
-const carto = require('../utils/carto');
+const carto = require("../utils/carto");
 
 function toTitleCase(str) {
-  return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+  return str.replace(
+    /\w\S*/g,
+    (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+  );
 }
 
 const cityMapStreetSearch = (string) => {
@@ -14,14 +17,15 @@ const cityMapStreetSearch = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL)
-    .then(rows => rows.map((row) => {
+  return carto.SQL(SQL).then((rows) =>
+    rows.map((row) => {
       row.the_geom = JSON.parse(row.the_geom);
       row.bbox = JSON.parse(row.bbox);
       row.label = toTitleCase(row.official_s);
-      row.type = 'city-street';
+      row.type = "city-street";
       return row;
-    }));
+    })
+  );
 };
 
 module.exports = cityMapStreetSearch;

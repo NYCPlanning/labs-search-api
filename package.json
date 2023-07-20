@@ -3,16 +3,17 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "NODE_ENV=test node ./node_modules/mocha/bin/mocha ./test/**/*.js --exit",
+    "test": "NODE_ENV=test node ./node_modules/mocha/bin/mocha ./src/test/**/*.js --exit",
     "devstart": "nodemon ./bin/www",
-    "lint": "eslint -c .eslintrc lib"
+    "lint": "eslint src"
   },
   "license": "ISC",
   "dependencies": {
     "apicache": "^1.6.3",
+    "axios": "^1.4.0",
     "body-parser": "^1.15.2",
-    "chai": "4.1.2",
-    "chai-http": "4.0.0",
+    "chai": "4.3.7",
+    "chai-http": "4.3.0",
     "chai-things": "0.2.0",
     "debug": "^3.1.0",
     "dotenv": "^4.0.0",
@@ -21,21 +22,16 @@
     "numeral": "^2.0.6",
     "pluralize": "7.0.0",
     "proj4": "^2.4.4",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2",
     "slug": "^0.9.3",
     "underscore": "^1.8.3",
     "underscore.string": "3.3.5"
   },
   "engines": {
-    "node": "^16"
+    "node": "18.16.0"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.1",
-    "eslint": "^4.8.0",
-    "eslint-config-airbnb-base": "^12.0.2",
-    "eslint-loader": "^1.6.1",
-    "eslint-plugin-import": "^2.6.1",
-    "nodemon": "^2.0.18"
+    "eslint": "^8.40.0",
+    "nodemon": "^2.0.18",
+    "prettier": "2.8.8"
   }
 }

@@ -1,4 +1,4 @@
-const carto = require('../utils/carto');
+const carto = require("../utils/carto");
 
 // function toTitleCase(str) {
 // return str.replace(/\w\S*/g, txt => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
@@ -17,12 +17,13 @@ const cityMapAlteration = (string) => {
     LIMIT 5
   `;
 
-  return carto.SQL(SQL).then(rows =>
+  return carto.SQL(SQL).then((rows) =>
     rows.map((row) => {
       row.the_geom = JSON.parse(row.the_geom);
-      row.type = 'city-map-alteration';
+      row.type = "city-map-alteration";
       return row;
-    }));
+    })
+  );
 };
 
 module.exports = cityMapAlteration;
