@@ -1,6 +1,7 @@
 const express = require("express");
 const searchHelpers = require("../search-helpers");
 const { camelize } = require("underscore.string");
+const { escapeSqlLiteral } = require("../utils/sql");
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get("/", async (req, res, next) => {
   const { q } = req.query;
   let { helpers } = req.query; // optional
 
-  const cleanedString = q.replace("'", "''");
+  const cleanedString = escapeSqlLiteral(q);
 
   // if no helpers param was passed, return only geosearch-v2 results
   if (!helpers) helpers = ["geosearch-v2"];
@@ -44,7 +45,7 @@ router.get("/:search_helper", (req, res) => {
     res.status(500).send({ error: "Search helper does not exist" });
   } else {
     const { q } = req.query;
-    const cleanedString = q.replace("'", "''");
+    const cleanedString = escapeSqlLiteral(q);
 
     search_helper(cleanedString, req).then((data) => {
       res.json(data);
